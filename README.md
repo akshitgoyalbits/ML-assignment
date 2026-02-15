@@ -114,24 +114,24 @@ After training, each model will display:
 - Classification report (precision, recall, f1-score)
 - Confusion matrix
 
-## 🔧 Troubleshooting
+## Comparison table with evaluation metrics calculated
 
-**Issue**: Models not found error
-- **Solution**: Make sure you've run all model training scripts first
+| Model                | Accuracy | AUC    | Precision | Recall | F1 Score | MCC    |
+|----------------------|----------|--------|-----------|--------|----------|--------|
+| Logistic Regression  | 0.8792   | 0.9489 | 0.1968    | 0.8909 | 0.3224   | 0.3851 |
+| Random Forest        | 0.9940   | 0.9914 | 0.9786    | 0.8318 | 0.8993   | 0.8993 |
+| XGBoost              | 0.9919   | 0.9897 | 0.8541    | 0.9045 | 0.8786   | 0.8748 |
+| KNN Classifier       | 0.9743   | 0.9309 | 0.7922    | 0.2773 | 0.4108   | 0.4596 |
+| Gaussian Naive Bayes | 0.2713   | 0.8279 | 0.0413    | 0.9727 | 0.0793   | 0.0912 |
+| Decision Tree        | 0.9487   | 0.9408 | 0.3792    | 0.9273 | 0.5383   | 0.5746 |
 
-**Issue**: Feature count mismatch
-- **Solution**: Ensure your test CSV has exactly 95 feature columns
+## Observations for each model
 
-**Issue**: Import errors
-- **Solution**: Run `pip install -r requirements.txt` in your virtual environment
-
-## 📝 Notes
-
-- All models use StandardScaler for feature normalization
-- Data is split 80/20 for training/testing with stratification
-- Random state is set to 42 for reproducibility
-- XGBoost uses logloss as the evaluation metric
-
-## 🙏 Acknowledgments
-
-This project was created as part of ML Assignment 2, inspired by bankruptcy prediction challenges in financial analytics.
+| ML Model Name            | Observation about model performance                                                                     |
+|--------------------------|---------------------------------------------------------------------------------------------------------|
+| Logistic Regression      | High recall (0.8909) - catches most positives<br>  - Very low precision (0.1968) - many false positives |
+| Decision Tree            | Good recall (0.9273) but low precision (0.3792)<br>  - Overfits to positive class                       |
+| kNN                      | High accuracy (97.43%) but misleading due to class imbalance                                            |
+| Naive Bayes              | Very low accuracy (27.13%) - below random guessing<br>  - Extremely low precision (0.0413)              |
+| Random Forest (Ensemble) | Excellent precision (0.9786) - very few false positives Well-balanced with F1 score of 0.8993          |
+| XGBoost<br>(Ensemble)    | Best recall (0.9045) among the high-precision models                                                    |
